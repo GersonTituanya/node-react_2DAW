@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="dropdown.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+    //	window.addEventListener("resize", function() {
+    //		"use strict"; window.location.reload(); 
+    //	});
+    
+    
+      document.addEventListener("DOMContentLoaded", function(){
+            
+    
+          /////// Prevent closing from click inside dropdown
+        document.querySelectorAll('.dropdown-menu').forEach(function(element){
+          element.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+        })
+    
+    
+    
+        // make it as accordion for smaller screens
+        if (window.innerWidth < 992) {
+    
+          // close all inner dropdowns when parent is closed
+          document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
+            everydropdown.addEventListener('hidden.bs.dropdown', function () {
+              // after dropdown is hidden, then find all submenus
+                this.querySelectorAll('.submenu').forEach(function(everysubmenu){
+                  // hide every submenu as well
+                  everysubmenu.style.display = 'none';
+                });
+            })
+          });
+          
+          document.querySelectorAll('.dropdown-menu a').forEach(function(element){
+            element.addEventListener('click', function (e) {
+        
+                let nextEl = this.nextElementSibling;
+                if(nextEl && nextEl.classList.contains('submenu')) {	
+                  // prevent opening link if link needs to open dropdown
+                  e.preventDefault();
+                  console.log(nextEl);
+                  if(nextEl.style.display == 'block'){
+                    nextEl.style.display = 'none';
+                  } else {
+                    nextEl.style.display = 'block';
+                  }
+    
+                }
+            });
+          })
+        }
+        // end if innerWidth
+    
+      }); 
+      // DOMContentLoaded  end
+    </script>
+
+</head>
+<body>
+
+<header class="mt-3 container">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+        </div>
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+        </div>
+    <div class="col-sm-4">
+        <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+        </div>
+  </div>
+  
+</header>
+
+<div class="mt-5 pb-5 container">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    
+      <ul class="navbar-nav container-fluid">
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="index.html">Inicio</a>
+        </li>
+        
+
+          <li style="width: 14%;text-align: center;" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-primary" href="#" data-bs-toggle="dropdown">  Tipos  </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#"> Profesores &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="cursos.html">Cursos</a></li>
+                  <li><a class="dropdown-item" href="job_shadowing.html">Job shadowing</a></li>
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                 </ul>
+              </li>
+                <li><a class="dropdown-item" href="#"> Alumnos &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                  <li><a class="dropdown-item" href="estancias_practicas.html">Estancias de practicas</a></li>
+                 </ul>
+              </ul>
+          </li>
+          </li>
+          
+  
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+
+          <div class="dropdown">
+            <button style="width: 100%;" type="button" class="nav-link btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+              Países
+            </button>
+            <ul class="dropdown-menu bg-dark">
+              <li><a class="nav-link dropdown-link  btn btn-primary" href="noruega.html">Noruega</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="turquia.html">Turquia</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="alemania.html">Alemania</a></li>
+            </ul>
+          </div>
+
+        </li>
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="experiencias.html">Experiencias</a>
+        </li>
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="prensa.html">Prensa</a>
+        </li>
+        
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+            <a class="nav-link btn btn-primary" href="contacto.html">Contacto</a>
+          </li>
+        
+
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+  
+            <div style="width: 100%;height: 100%;" id="google_translate_element" class="google"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'ca,eu,gl,en,fr,it,pt,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true}, 'google_translate_element');
+      }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        </li>
+          
+
+      </ul>
+    
+  </nav>
+</div>
+
+
+<div class="container">
+  <hr>
+<h1>Estancias en Formacion Disponibles</h1>
+<p>Aqui puedes encontrar todas las clases de estancias de formacion que existen de todas las profesiones que puedas imaginar , solo queda que elijas.</p>
+</div>
+
+
+    <div class="container">
+<hr>
+      <div class="row">
+
+        <div class="col-sm-4">
+
+          <div class="card" style="width:400px;height: 400px;">
+            <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/img-female-student-sitting-with-laptop-outside-the-college.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <a href="https://www.ncirl.ie/Courses/search?coursetypes=Postgraduate"><h4 class="card-title">Cursos de posgrado</h4></a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="card" style="width:400px;height: 400px;">
+            <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/img-home-undergraduate.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <a href="https://www.ncirl.ie/Courses/search?coursetypes=Undergraduate"><h4 class="card-title">Cursos de pregrado</h4></a>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="card" style="width:400px;height: 400px;">
+            <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/img-study-undergraduate.jpg" alt="Card image" style="width:100%">
+            <div class="card-body">
+              <a href="https://www.ncirl.ie/Courses/search?coursetypes=Full-time"><h4 class="card-title">Cursos a tiempo completo</h4></a>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+<hr>
+    </div>
+
+
+
+
+
+
+    <div class="container">
+      <hr>
+            <div class="row">
+      
+              <div class="col-sm-4">
+      
+                <div class="card" style="width:400px;height: 400px;">
+                  <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/img-male-student-at-college-with-other-students-in-the-background.jpg" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                    <a href="https://www.ncirl.ie/Courses/search?coursetypes=Part-time"><h4 class="card-title">Cursos a tiempo parcial</h4></a>
+                  </div>
+                </div>
+      
+              </div>
+      
+              <div class="col-sm-4">
+      
+                <div class="card" style="width:400px;height: 400px;">
+                  <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/Fintech%20Courses%20at%20NCI.jpg" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                    <a href="https://www.ncirl.ie/Courses/search?coursetypes=Springboard%2B"><h4 class="card-title">Plataforma de lanzamiento</h4></a>
+                  </div>
+                </div>
+                
+              </div>
+      
+              <div class="col-sm-4">
+      
+                <div class="card" style="width:400px;height: 400px;">
+                  <img class="card-img-top" src="https://www.ncirl.ie/Portals/0/Images/450x253-Cards-Teasers/img-international-students-in-the-atrium.jpg" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                    <a href="https://www.ncirl.ie/Courses/search?coursetypes=International"><h4 class="card-title">Cursos de Estudiantes Internacionales</h4></a>
+                  </div>
+                </div>
+                
+              </div>
+      
+            </div>
+      <hr>
+          </div>
+
+
+
+    <footer class="pt-5 container">
+      <div class="row">
+    
+        <div class="col-sm-4">
+          <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+            </div>
+        <div class="col-sm-4">
+          <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+            </div>
+        <div class="col-sm-4">
+            <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+            </div>
+      </div>
+      <div style="text-align: center;" class="pt-3">
+      <p>Redes sociales:<a href="https://erasmus-plus.ec.europa.eu/es" style="padding-left: 10px;">Erasmus</a> ,<a href="https://ceice.gva.es/es/" style="padding-left: 10px;">Generalitat Valenciana</a> ,<a href="https://www.iesalvarofalomir.es/" style="padding-left: 10px;">Àlvaro Falomir</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

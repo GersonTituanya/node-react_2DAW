@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./dropdown.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+    //	window.addEventListener("resize", function() {
+    //		"use strict"; window.location.reload(); 
+    //	});
+    
+    
+      document.addEventListener("DOMContentLoaded", function(){
+            
+    
+          /////// Prevent closing from click inside dropdown
+        document.querySelectorAll('.dropdown-menu').forEach(function(element){
+          element.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+        })
+    
+    
+    
+        // make it as accordion for smaller screens
+        if (window.innerWidth < 992) {
+    
+          // close all inner dropdowns when parent is closed
+          document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
+            everydropdown.addEventListener('hidden.bs.dropdown', function () {
+              // after dropdown is hidden, then find all submenus
+                this.querySelectorAll('.submenu').forEach(function(everysubmenu){
+                  // hide every submenu as well
+                  everysubmenu.style.display = 'none';
+                });
+            })
+          });
+          
+          document.querySelectorAll('.dropdown-menu a').forEach(function(element){
+            element.addEventListener('click', function (e) {
+        
+                let nextEl = this.nextElementSibling;
+                if(nextEl && nextEl.classList.contains('submenu')) {	
+                  // prevent opening link if link needs to open dropdown
+                  e.preventDefault();
+                  console.log(nextEl);
+                  if(nextEl.style.display == 'block'){
+                    nextEl.style.display = 'none';
+                  } else {
+                    nextEl.style.display = 'block';
+                  }
+    
+                }
+            });
+          })
+        }
+        // end if innerWidth
+    
+      }); 
+      // DOMContentLoaded  end
+    </script>
+
+</head>
+<body>
+
+<header class="mt-3 container">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+        </div>
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+        </div>
+    <div class="col-sm-4">
+        <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+        </div>
+  </div>
+  
+</header>
+
+<div class="mt-5 pb-5 container">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    
+      <ul class="navbar-nav container-fluid">
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="index.html">Inicio</a>
+        </li>
+        
+
+          <li style="width: 14%;text-align: center;" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-primary" href="#" data-bs-toggle="dropdown">  Tipos  </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#"> Profesores &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="cursos.html">Cursos</a></li>
+                  <li><a class="dropdown-item" href="job_shadowing.html">Job shadowing</a></li>
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                 </ul>
+              </li>
+                <li><a class="dropdown-item" href="#"> Alumnos &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                  <li><a class="dropdown-item" href="estancias_practicas.html">Estancias de practicas</a></li>
+                 </ul>
+              </ul>
+          </li>
+          </li>
+          
+  
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+
+          <div class="dropdown">
+            <button style="width: 100%;" type="button" class="nav-link btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+              Países
+            </button>
+            <ul class="dropdown-menu bg-dark">
+              <li><a class="nav-link dropdown-link  btn btn-primary" href="noruega.html">Noruega</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="turquia.html">Turquia</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="alemania.html">Alemania</a></li>
+            </ul>
+          </div>
+
+        </li>
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="experiencias.html">Experiencias</a>
+        </li>
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="prensa.html">Prensa</a>
+        </li>
+        
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+            <a class="nav-link btn btn-primary" href="contacto.html">Contacto</a>
+          </li>
+        
+
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+  
+            <div style="width: 100%;height: 100%;" id="google_translate_element" class="google"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'ca,eu,gl,en,fr,it,pt,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true}, 'google_translate_element');
+      }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        </li>
+          
+
+      </ul>
+    
+  </nav>
+</div>
+
+<div class="container mt-5">
+
+  <h1>Información del instituto Álvaro Falomir</h1>
+
+  <p>El IES Alvaro Falomir fue el primer instituto de Almassora, lo que suponía que los jóvenes de Almassora, cuando terminaban los estudios primarios, podían seguir estudiando sin tener que irse a Castellón. Sin embargo, muchos niños no podían aprovechar esta oportunidad porque a esa edad ya podían trabajar legalmente y necesitaban el dinero para poder mantener a la familia, por tanto en el instituto iba poca gente.</p>
+  <br>
+  <p>Y ahora se ha unido a los planes de modernización , ayuda y cooperación con la Union Europea y ha iniciado hace pocos años el plan Erasmus pra conocer , estudiar y apoyar otros paises</p>
+
+  <p>Imágenes del instituto :</p>
+</div>
+
+<div id="demo" class="carousel slide container" data-bs-ride="carousel">
+
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="6"></button>
+  </div>
+  
+  <!-- The slideshow/carousel -->
+  <div style="height: 500px;width:100%;padding: 0%;" class="carousel-inner content-center">
+    <div class="carousel-item active">
+      <img src="data:image/jpeg;base64,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" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+      
+    </div>
+    <div class="carousel-item">
+      <img src="https://estaticos-cdn.prensaiberica.es/clip/23113e69-5759-4be4-b1cf-d9d3858e2480_16-9-discover-aspect-ratio_default_0.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+      
+    </div>
+    <div class="carousel-item">
+      <img src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/02/03/16439143356652.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+       
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.castelloninformacion.com/wp-content/uploads/2022/05/19535974-3c07-4481-ad6c-a3e57a892c16_16-9-aspect-ratio_default_0.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+        
+    </div>
+    <div class="carousel-item">
+      <img src="https://estaticos-cdn.prensaiberica.es/clip/c0695e3a-cd55-4971-9ee1-57ccc31fc416_16-9-discover-aspect-ratio_default_0.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+       
+    </div>
+    <div class="carousel-item">
+      <img src="https://castellonplaza.com/public/Image/2023/3/AlmassoraIESFalomir_NoticiaAmpliada_forCrop.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+        
+    </div>
+    <div class="carousel-item">
+      <img src="https://castellonplaza.com/public/Image/2020/2/AlmassoraIESAlvaroFalomir_NoticiaAmpliada_NoticiaAmpliada.jpg" alt="IES Álvaro Falomir" class="d-block" style="width:100%;height: 500px;padding: 0%;">
+       
+    </div>
+    
+  </div>
+  
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+<div class="container pt-4">
+
+  <h1>Información del Erasmus+</h1>
+
+  <p>El Programa Erasmus+ ofrece oportunidades a: Estudiantes y Profesores que deseen estudiar, formarse u obtener experiencia laboral en el extranjero (incluidas las movilidades desde y hacia Europa en el ámbito de la Educación y Practicas).</p>
+  <br>
+  <p>Enlace a sitio web que explica : <a href="https://erasmus-plus.ec.europa.eu/es/about-erasmus/what-is-erasmus">Todo sobre Erasmus+</a></p>
+
+</div>
+
+<footer class="mt-3 container">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+        </div>
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+        </div>
+    <div class="col-sm-4">
+        <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+        </div>
+  </div>
+  <div style="text-align: center;" class="pt-3">
+  <p>Redes sociales:<a href="https://erasmus-plus.ec.europa.eu/es" style="padding-left: 10px;">Erasmus</a> ,<a href="https://ceice.gva.es/es/" style="padding-left: 10px;">Generalitat Valenciana</a> ,<a href="https://www.iesalvarofalomir.es/" style="padding-left: 10px;">Àlvaro Falomir</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

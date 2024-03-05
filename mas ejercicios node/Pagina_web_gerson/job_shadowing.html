@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="dropdown.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+    //	window.addEventListener("resize", function() {
+    //		"use strict"; window.location.reload(); 
+    //	});
+    
+    
+      document.addEventListener("DOMContentLoaded", function(){
+            
+    
+          /////// Prevent closing from click inside dropdown
+        document.querySelectorAll('.dropdown-menu').forEach(function(element){
+          element.addEventListener('click', function (e) {
+            e.stopPropagation();
+          });
+        })
+    
+    
+    
+        // make it as accordion for smaller screens
+        if (window.innerWidth < 992) {
+    
+          // close all inner dropdowns when parent is closed
+          document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown){
+            everydropdown.addEventListener('hidden.bs.dropdown', function () {
+              // after dropdown is hidden, then find all submenus
+                this.querySelectorAll('.submenu').forEach(function(everysubmenu){
+                  // hide every submenu as well
+                  everysubmenu.style.display = 'none';
+                });
+            })
+          });
+          
+          document.querySelectorAll('.dropdown-menu a').forEach(function(element){
+            element.addEventListener('click', function (e) {
+        
+                let nextEl = this.nextElementSibling;
+                if(nextEl && nextEl.classList.contains('submenu')) {	
+                  // prevent opening link if link needs to open dropdown
+                  e.preventDefault();
+                  console.log(nextEl);
+                  if(nextEl.style.display == 'block'){
+                    nextEl.style.display = 'none';
+                  } else {
+                    nextEl.style.display = 'block';
+                  }
+    
+                }
+            });
+          })
+        }
+        // end if innerWidth
+    
+      }); 
+      // DOMContentLoaded  end
+    </script>
+
+</head>
+<body>
+
+<header class="mt-3 container">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+        </div>
+    <div class="col-sm-4">
+      <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+        </div>
+    <div class="col-sm-4">
+        <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+        </div>
+  </div>
+  
+</header>
+
+<div class="mt-5 pb-5 container">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    
+      <ul class="navbar-nav container-fluid">
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="index.html">Inicio</a>
+        </li>
+        
+
+          <li style="width: 14%;text-align: center;" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn btn-primary" href="#" data-bs-toggle="dropdown">  Tipos  </a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#"> Profesores &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="cursos.html">Cursos</a></li>
+                  <li><a class="dropdown-item" href="job_shadowing.html">Job shadowing</a></li>
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                 </ul>
+              </li>
+                <li><a class="dropdown-item" href="#"> Alumnos &raquo; </a>
+                 <ul class="submenu dropdown-menu">
+                  <li><a class="dropdown-item" href="estancias_formacion.html">Estancias de formacion</a></li>
+                  <li><a class="dropdown-item" href="estancias_practicas.html">Estancias de practicas</a></li>
+                 </ul>
+              </ul>
+          </li>
+          </li>
+          
+  
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+
+          <div class="dropdown">
+            <button style="width: 100%;" type="button" class="nav-link btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+              Países
+            </button>
+            <ul class="dropdown-menu bg-dark">
+              <li><a class="nav-link dropdown-link  btn btn-primary" href="noruega.html">Noruega</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="turquia.html">Turquia</a></li>
+              <li><a class="nav-link dropdown-link btn btn-primary" href="alemania.html">Alemania</a></li>
+            </ul>
+          </div>
+
+        </li>
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="experiencias.html">Experiencias</a>
+        </li>
+        
+        
+        <li style="width: 14%;text-align: center;" class="nav-item">
+          <a class="nav-link btn btn-primary" href="prensa.html">Prensa</a>
+        </li>
+        
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+            <a class="nav-link btn btn-primary" href="contacto.html">Contacto</a>
+          </li>
+        
+
+        
+          <li style="width: 14%;text-align: center;" class="nav-item">
+  
+            <div style="width: 100%;height: 100%;" id="google_translate_element" class="google"></div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'ca,eu,gl,en,fr,it,pt,de', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true}, 'google_translate_element');
+      }
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        </li>
+          
+
+      </ul>
+    
+  </nav>
+</div>
+
+<div class="container pt-3">
+<hr>
+<h1>Informacion de todos los "Job Showing"</h1>
+<hr>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo">Cursos de licencia de correo (PLC)</button>
+  <div id="demo" class="collapse">
+    Los PLC son a tiempo completo y duran de uno a dos años. Ofrecen una mezcla de trabajo práctico, trabajo académico y experiencia laboral. Están diseñadas como un paso hacia el empleo cualificado y, como tales, están estrechamente vinculados a la industria y sus necesidades. Los cursos de Post Entrega de Certificados adoptan un enfoque integrado, centrándose en los conocimientos técnicos, las habilidades básicas y la experiencia laboral. Los cursos se imparten en una amplia gama de temas, como estudios empresariales, cuidado de niños, cuidado comunitario, informática y tecnología, comercio electrónico, horticultura, producción multimedia, deporte y ocio y turismo. Los cursos generalmente conducen a grandes premios en los niveles 5 y 6 del NFQ.
+  </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo2">Plan de oportunidades de formación profesional</button>
+  <div id="demo2" class="collapse">
+    El Plan VTOS ofrece una serie de cursos para ayudar a las personas desempleadas a reincorporarse a la fuerza laboral. Los cursos son de tiempo completo y suelen impartirse a lo largo de dos años académicos a tiempo completo de 30 horas por semana. Los cursos tienen por objeto ayudar a los participantes a mejorar su nivel de educación, obtener la certificación, desarrollar sus habilidades y prepararse para el empleo, el trabajo por cuenta propia y la educación y formación continuas. Algunos ejemplos incluyen TIC, Arte y Diseño, Administración de Empresas, Cuidado de la Infancia y Medios Digitales. Los cursos conducen a una gama de premios a través de los niveles de NFQ.
+   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo3">Alcanal juvenil</button>
+  <div id="demo3" class="collapse">
+    Youthreach es un programa de tiempo completo, generalmente de más de dos años, para los jóvenes de 15 a 20 años, que abandonan la escuela antes de tiempo y no están trabajando. Conduce a premios típicamente en los niveles 3 y 4 en el NFQ. Los estudiantes son apoyados en el establecimiento de planes de aprendizaje individuales dirigidos a aumentar su autoestima, habilidades y conocimientos y capacidad para conseguir un trabajo.
+
+Este programa está cofinanciado por el Gobierno irlandés, el Fondo Social Europeo y la Iniciativa de Empleo Juvenil en el marco del Programa FSE para la Empleabilidad, la Inclusión y el Aprendizaje 2014-2020.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo4">Cursos de Brillo/Fundación</button>
+  <div id="demo4" class="collapse">
+    Los cursos de la Fundación ayudan a preparar a los alumnos para que estén preparados para los cursos dirigidos por el mercado laboral o el empleo de nivel inicial. Estos cursos pueden ser de corta o larga duración. Generalmente están acreditados en los niveles 3 y 4 en el NFQ. Estos cursos están dirigidos a personas que no han estado trabajando durante al menos un año o más, o que desean volver al empleo o a la educación y la formación después de un largo período fuera del trabajo.
+
+Este programa está cofinanciado por el Gobierno irlandés y el Fondo Social Europeo en el marco del Programa FSE para la Empleabilidad, la Inclusión y el Aprendizaje 2014-2020.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo5">Formación específica de habilidades (SST)</button>
+  <div id="demo5" class="collapse">
+    Los cursos específicos de capacitación suelen durar más de seis meses de duración para completar y están diseñados para satisfacer las necesidades de la industria en una gama de sectores que conducen a la acreditación en los niveles 4-6 del NFQ o a la certificación de un organismo de acreditación del Reino Unido o de la industria. Los cursos son de tiempo completo y todo el año. Ejemplos de cursos incluyen: Aplicaciones informáticas y habilidades de oficina, habilidades minoristas Salud y belleza, Administración de negocios, gestión de seguridad de TI, Mejora de los procesos de negocios, nóminas manuales y informatizadas, Operaciones de fabricación de ciencias de la vida.
+
+Este programa está cofinanciado por el Gobierno irlandés y el Fondo Social Europeo en el marco del Programa FSE para la Empleabilidad, la Inclusión y el Aprendizaje 2014-2020.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo6">Acorazado</button>
+  <div id="demo6" class="collapse">
+    Las pasantías suelen tardar de 4-9 meses de tiempo completo para completar. Proporcionan capacitación específica para la ocupación e integran la formación formal en las aulas y el coaching en el lugar de trabajo con un empleador anfitrión. Los cursos son a tiempo completo y todo el año para facilitar por primera vez a los que se incorporan al mercado laboral y a las personas que desean actualizar o adquirir nuevas competencias. Todos los programas conducen a la acreditación en los niveles 4-6 de la NFQ o a la certificación de un organismo acreditado externo reconocido. Los cursos incluyen: Terapetera de Belleza, Instructor de Actividad al aire libre, Technician de Servicios de Sistemas de Negocios y Desarrollador de Software.
+
+Este programa está cofinanciado por el Gobierno irlandés y el Fondo Social Europeo en el marco del Programa FSE para la Empleabilidad, la Inclusión y el Aprendizaje 2014-2020.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo7">Centros de Formación Comunitaria (CTC)</button>
+  <div id="demo7" class="collapse">
+    Los CTC son organizaciones comunitarias independientes, que proporcionan capacitación y educación a los que abandonan prematuramente la escuela, principalmente de entre 16 y 21 años. Entre los ejemplos de programas ofrecidos figuran las aptitudes para la empleabilidad, las aptitudes para el empleo personal y social y las aptitudes científicas. Todos los programas ofrecen desarrollo de aptitudes personales y sociales mediante módulos como comunicaciones, eficacia personal, trabajo en equipo, planificación de carreras y alfabetización y apoyo a la aritmética integrado con los módulos de formación profesional. Los cursos suelen tener una duración de un año y tienen un tiempo completo y conducen a grandes premios en la NFQ en los niveles 3 y 4.
+
+Este programa está cofinanciado por el Gobierno irlandés, el Fondo Social Europeo y la Iniciativa de Empleo Juvenil en el marco del Programa FSE para la Empleabilidad, la Inclusión y el Aprendizaje 2014-2020.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo8">Proveedores de Entrenamiento Especialista (STPS)</button>
+  <div id="demo8" class="collapse">
+    Los STP ofrecen una serie de programas de capacitación flexibles para personas con discapacidad. Por lo general, los cursos tienen una a dos años de duración, se imparten durante todo el año y conducen a la acreditación en los niveles 1-6 del NFQ. Los ejemplos de cursos incluyen las TIC y las multicapacidades profesionales. La formación profesional especializada puede proporcionar una serie de servicios mejorados a sus alumnos, incluida la duración adicional de la formación; el equipo adaptado; los arreglos de transporte; el mayor contenido del programa que puede ser necesario para que una persona con discapacidad pueda alcanzar su potencial. En estos programas se ofrece una relación mejorada entre los entrenadores y los usuarios.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo9">Programa de la Iniciativa de Capacitación Local (LTI)</button>
+  <div id="demo9" class="collapse">
+    La LTI es un programa de capacitación y experiencia laboral basado en proyectos realizado en la comunidad local dirigido por grupos comunitarios locales. El programa está diseñado para personas desempleadas, principalmente aquellas de 18 años y 35 años que tienen dificultades para acceder al mercado laboral. Los LTI apoyan a muchas organizaciones que participan en una amplia gama de iniciativas, incluyendo genealogía, ambiental, patrimonio, turismo, teatro, deportes y coaching. Algunos proyectos están dirigidos a grupos específicos de la sociedad. La capacitación en iniciativas locales de capacitación conduce a la acreditación en los niveles de la NFQ en los niveles 3, 4 y 5. Los cursos son a tiempo completo y entregados todo el año.   </div>
+</div>
+
+<div class="container mt-3">
+  <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#demo10">Aprendizaje</button>
+  <div id="demo10" class="collapse">
+    El aprendizaje es un programa de educación y formación estructurado basado en el trabajo que combina y alterna formalmente el aprendizaje en el lugar de trabajo con el aprendizaje en un centro de educación o formación.
+
+El aprendizaje comienza con un contrato de empleo con un empleador aprobado.
+
+Para más información consulte <a href="https://www.apprenticeship.ie/">www.apprenticeship.ie</a>   </div>
+</div>
+
+    <footer class="pt-5 container">
+      <hr>
+      <div class="row">
+    
+        <div class="col-sm-4">
+          <img  style="width: 90%;height: 150px;padding: 0%;" src="https://www.iesalvarofalomir.es/wp-content/uploads/2022/09/cropped-cropped-cropped-logo_correcte.png">
+            </div>
+        <div class="col-sm-4">
+          <img  style="width: 90%;height: 150px;padding: 0%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT265rdoH6plb-xkpX_4TeQulAE1rmyC1pYfw&usqp=CAU">
+            </div>
+        <div class="col-sm-4">
+            <img  style="width: 90%;height: 150px;padding: 0%;" src="data:image/png;base64,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">
+            </div>
+      </div>
+      <div style="text-align: center;" class="pt-3">
+      <p>Redes sociales:<a href="https://erasmus-plus.ec.europa.eu/es" style="padding-left: 10px;">Erasmus</a> ,<a href="https://ceice.gva.es/es/" style="padding-left: 10px;">Generalitat Valenciana</a> ,<a href="https://www.iesalvarofalomir.es/" style="padding-left: 10px;">Àlvaro Falomir</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
